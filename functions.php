@@ -1,6 +1,7 @@
 <?php
 
 add_theme_support( 'post-thumbnails', array( 'post' ) );
+
 add_action('wp_enqueue_scripts', 'study_template_scripts');
 function study_template_scripts()
 {

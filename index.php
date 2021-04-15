@@ -16,7 +16,7 @@ if (have_posts()) :
                 <li>
                     <?php
                     $user = wp_get_current_user();
-                    if (get_the_author() == $user->nickname && current_user_can('edit_published_posts')) {
+                    if (get_the_author() == $user->nickname || current_user_can('edit_published_posts')) {
                         edit_post_link();
                     }
                     ?>
@@ -27,13 +27,9 @@ if (have_posts()) :
             </ul>
 
             <?php
-            if (is_page()) {
-                the_shortlink('Read more!', 'link', '<p class="text-center">', '</p>');
-            } else {
+            if (!is_page()) {
                 the_shortlink('Read more!', 'link', '<p class="text-center">', '</p>');
             }
-
-
             ?>
 
             <hr>
