@@ -1,6 +1,6 @@
 <?php
 
-add_theme_support('post-thumbnails', array('post'));
+add_theme_support('post-thumbnails');
 add_image_size('short_img', 150, 150, true);
 
 add_action('init', 'study_template_init');
@@ -9,24 +9,25 @@ function study_template_init()
     register_post_type('book', [
             'label' => null,
             'labels' => [
-                'name' => 'books', // основное название для типа записи
-                'singular_name' => 'book', // название для одной записи этого типа
-                'add_new' => 'Add book', // для добавления новой записи
-                'add_new_item' => 'Add book', // заголовка у вновь создаваемой записи в админ-панели.
-                'edit_item' => 'Edit book', // для редактирования типа записи
-                'new_item' => 'New text book', // текст новой записи
-                'view_item' => 'Open book', // для просмотра записи этого типа.
-                'search_items' => 'Search book', // для поиска по этим типам записи
-                'not_found' => 'Not found', // если в результате поиска ничего не было найдено
-                'not_found_in_trash' => 'Not found in trash', // если не было найдено в корзине
-                'parent_item_colon' => '', // для родителей (у древовидных типов)
-                'menu_name' => 'books', // название меню
+                'name' => 'books',
+                'singular_name' => 'book',
+                'add_new' => 'Add book',
+                'add_new_item' => 'Add book',
+                'edit_item' => 'Edit book',
+                'new_item' => 'New text book',
+                'view_item' => 'Open book',
+                'search_items' => 'Search book',
+                'not_found' => 'Not found',
+                'not_found_in_trash' => 'Not found in trash',
+                'parent_item_colon' => '',
+                'menu_name' => 'books',
             ],
             'description' => '',
             'public' => true,
             'has_archive' => true,
             'rewrite' => array('slug' => 'book'),
-            'supports' => ['title', 'editor', 'author', 'thumbnail',], // 'title','editor','author','thumbnail','excerpt','trackbacks','custom-fields','comments','revisions','page-attributes','post-formats'
+            'supports' => ['title', 'editor', 'author', 'thumbnail',],
+            'taxonomies'  => array( 'category' ),
         ]
     );
 }

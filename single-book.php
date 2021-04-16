@@ -1,13 +1,13 @@
 <?php
-get_header();
+get_header('book');
 
 if (have_posts()) {
     while (have_posts()) : the_post(); ?>
-        <div class="col-12 d-flex flex-column justify-content-center">
+        <div class="col-12 d-flex flex-column justify-content-center mt-5 mb-5 book-blur">
             <?php
             the_title('<h2 class="text-center mb-3">', '</h2>');
             the_post_thumbnail();
-            the_excerpt(); //the_content();
+            the_content(); //the_content();
             ?>
             <ul class="m-0 p-0 mb-4">
                 <li>Author: <?= get_the_author_link(); ?></li> <!-- get_the_author_link() -->

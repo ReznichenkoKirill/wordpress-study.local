@@ -32,3 +32,26 @@ header, footer {
     height: 100px;
     object-fit: cover;
 }
+main > div {
+    border-bottom: 1px solid var(--bg-color-dark)!important;
+}
+main > :last-of-type {
+    border: none!important;
+    /*margin-bottom: 0!important;*/
+}
+nav.navigation.pagination {
+    display: flex;
+    justify-content: center;
+}
+.book-bg {
+    background-image: url("../img/bg-book.jpg");
+    background-repeat: repeat;
+    backdrop-filter: blur(55px);
+}
+.book-blur {
+    background: rgba(255,255,255,.9);
+    backdrop-filter: blur(50px);
+    padding: 10px 5px;
+    border-radius: 5px;
+
+}
