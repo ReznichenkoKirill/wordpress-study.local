@@ -20,5 +20,3 @@
 </header>
 <main class="container d-flex flex-column justify-content-center">
     <?php wp_body_open(); ?>
-
-

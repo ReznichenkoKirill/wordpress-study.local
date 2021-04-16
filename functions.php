@@ -27,17 +27,19 @@ function study_template_init()
             'has_archive' => true,
             'rewrite' => array('slug' => 'book'),
             'supports' => ['title', 'editor', 'author', 'thumbnail',],
-            'taxonomies'  => array( 'category' ),
+            'taxonomies' => array('category'),
         ]
     );
 }
 
-function webpro_add_books_to_query( $query ) {
-    if ( is_home() && $query->is_main_query() )
-        $query->set( 'post_type', array( 'post', 'book' ) );
+function webpro_add_books_to_query($query)
+{
+    if (is_home() && $query->is_main_query())
+        $query->set('post_type', array('post', 'book'));
     return $query;
 }
-add_action( 'pre_get_posts', 'webpro_add_books_to_query' );
+
+add_action('pre_get_posts', 'webpro_add_books_to_query');
 
 add_action('wp_enqueue_scripts', 'study_template_scripts');
 function study_template_scripts()
