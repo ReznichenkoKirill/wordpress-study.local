@@ -1,17 +1,14 @@
 <?php get_header();
-
-
-if (have_posts()) :
-    while (have_posts()) : the_post();
-        ?>
-        <div class="contents-container"><?php
-            the_title('<h2 class="text-center">', '</h2>');
-            the_post_thumbnail();
-            the_content();
-
+if (have_posts()) {
+    while (have_posts()) : the_post()?>
+        <div class="col-12 d-flex flex-column justify-content-center mt-4">
+            <?php
+            the_title('<h2 class="text-center mb-3">', '</h2>');
+            the_post_thumbnail('short_img');
+            the_excerpt(); //the_content();
             ?>
-            <ul class="contents-list">
-                <li>Author: <?php the_author(); ?></li> <!-- get_the_author_link() -->
+            <ul class="m-0 p-0 mb-4">
+                <li>Author: <?= get_the_author_link(); ?></li> <!-- get_the_author_link() -->
                 <li>Time: <?php the_time(); ?></li>
                 <li>
                     <?php
@@ -21,23 +18,15 @@ if (have_posts()) :
                     }
                     ?>
                 </li>
+                <li>Categories: <?php the_category('/'); ?></li>
             </ul>
-            <ul class="contents-list">
-                <li>Categories: <?php the_category(); ?></li>
-            </ul>
-
             <?php
             if (!is_page()) {
-                the_shortlink('Read more!', 'link', '<p class="text-center">', '</p>');
+                the_shortlink('Read more!', 'link', '<p class="text-center m-0 p-0">', '</p>');
             }
             ?>
-
-            <hr>
+            <hr class="mb-5">
         </div>
-    <?php
-    endwhile;
-else:
-    _e('Sorry, no posts matched your criteria.', 'textdomain');
-endif;
-?>
-<?php get_footer(); ?>
+    <?php endwhile;
+}
+get_footer();

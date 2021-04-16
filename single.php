@@ -1,16 +1,14 @@
-<?php
-get_header();
-
-if (have_posts()) :
-    while (have_posts()) : the_post();
-        ?>
-        <div class="content-container"><?php
-            the_title('<h2 class="text-center">', '</h2>');
-            the_post_thumbnail();   //img
-            the_content();  //or the_excerpt();
+<?php get_header();
+if (have_posts()) {
+    while (have_posts()) : the_post() ?>
+        <div class="col-12 d-flex flex-column justify-content-center">
+            <?php
+            the_title('<h2 class="text-center mb-3">', '</h2>');
+            the_post_thumbnail('short_img');
+            the_content(); //the_excerpt();
             ?>
-            <ul class="content-list">
-                <li>Author: <?php the_author(); ?></li>
+            <ul class="m-0 p-0 mb-4">
+                <li>Author: <?= get_the_author_link(); ?></li> <!-- get_the_author_link() -->
                 <li>Time: <?php the_time(); ?></li>
                 <li>
                     <?php
@@ -20,15 +18,10 @@ if (have_posts()) :
                     }
                     ?>
                 </li>
+                <li>Categories: <?php the_category('/'); ?></li>
             </ul>
-            <ul class="content-list">
-                <li>Categories: <?php the_category(); ?></li>
-            </ul>
-            <p class='text-center'><a href='<?= home_url() ?>' title='To homepage'>Back to homepage</a></p>
+            <p class="text-center m-0 p-0"><a href='<?= home_url() ?>' title='To homepage'>Back to homepage</a></p>
         </div>
-    <?php
-    endwhile;
-else:
-    _e('Sorry, no posts matched your criteria.');
-endif;
+    <?php endwhile;
+}
 get_footer();

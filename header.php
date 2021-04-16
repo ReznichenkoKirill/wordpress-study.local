@@ -1,4 +1,3 @@
-<?php include_once 'functions.php' ?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -8,16 +7,18 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <?php wp_head(); ?>
 </head>
-<header>
-    <div class="logo-container"><a href="<?= home_url();?>"><img src="<?=get_template_directory_uri()?>/assets/img/book-white.png" alt="book_logo" class="logo-img"></a></div>
-    <nav class="header-content">
-        <ul class="header-nav-menu">
-            <li><?php wp_nav_menu('menu=Top Menu'); ?></li>
+<body class="d-grid">
+<header class="">
+    <nav class="d-flex justify-content-between align-items-center">
+        <div class="col-4"><a href="<?= home_url(); ?>"><img
+                        src="<?= get_template_directory_uri() ?>/assets/img/book-white.png" alt="book_logo"
+                        class="logo-img"></a></div>
+        <ul class="col-8 d-flex justify-content-center">
+            <li><?php wp_nav_menu(['menu' => 'Top Menu', 'container_class' => 'link-light']); ?></li>
         </ul>
     </nav>
 </header>
-<body class="">
-    <main class="container">
-<?php wp_body_open(); ?>
+<main class="container d-flex flex-column justify-content-center">
+    <?php wp_body_open(); ?>
 
 
