@@ -1,0 +1,34 @@
+/*!*ROOT*!*/
+:root {
+    --text-white: #fff !important;
+    --bg-color-dark: #1D2327;
+    --button-color-dark: #1D2327;
+}
+
+/*!*#############*!*/
+/*DEFAULT RES.*/
+* {
+    list-style-type: none;
+    margin: 0;
+    text-decoration: none !important;
+}
+
+/*!*#############*!*/
+/*!*Custom Styles.*!*/
+html {
+    height: 100%;
+}
+body {
+    height: 100%;
+    grid-auto-rows: 0fr 1fr 0fr;
+}
+header, footer {
+    background-color: var(--bg-color-dark);
+    color: var(--text-white);
+    text-align: center;
+    height: max-content;
+}
+.logo-img {
+    height: 100px;
+    object-fit: cover;
+}
