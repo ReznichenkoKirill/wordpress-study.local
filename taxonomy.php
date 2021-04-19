@@ -1,2 +1,2 @@
 <?php
-echo 'Taxonomy';
+echo 'Taxonomy some text';
