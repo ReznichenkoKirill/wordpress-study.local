@@ -1,7 +1,6 @@
 <?php
 
 add_theme_support('post-thumbnails');
-add_image_size('short_img', 150, 150, true);
 
 add_action('init', 'study_template_init');
 function study_template_init()
@@ -32,14 +31,14 @@ function study_template_init()
     );
 }
 
-function webpro_add_books_to_query($query)
-{
-    if (is_home() && $query->is_main_query())
-        $query->set('post_type', array('post', 'book'));
-    return $query;
-}
-
-add_action('pre_get_posts', 'webpro_add_books_to_query');
+// выводить в последние записи постов / пости_тип[]
+//add_action('pre_get_posts', 'study_template_add_books_to_query');
+//function study_template_add_books_to_query($query)
+//{
+//    if (is_home() && $query->is_main_query())
+//        $query->set('post_type', array('post', 'book'));
+//    return $query;
+//}
 
 add_action('wp_enqueue_scripts', 'study_template_scripts');
 function study_template_scripts()
@@ -67,6 +66,39 @@ function study_template_menu()
         'bottom' => 'Bottom Menu',
     ]);
 }
+add_filter('excerpt_more', function($more) {
+    return '...';
+});
 
+//METABOX START
+//add_action('add_meta_boxes', 'study_template_meta_box');
+//function study_template_meta_box() {
+//    add_meta_box('date_of_write', 'Date of write the book', 'study_template_meta_box_date_callback', 'book');
+//    add_meta_box('author_of_the_book', 'Author of the book', 'study_template_meta_box_author_callback', 'book');
+//    // регистрируем новое кастомное метаполе для своего типа записи
+//}
+//function study_template_meta_box_date_callback( $post ) {
+//    wp_nonce_field('study_template_save_date', 'study_template_book_meta_box_nonce');
+//    // делает скрытое поле, для проверки подлиности запроса
+//
+//    $value = get_post_meta($post->ID, '_study_template_date_of_write_the_book', true);
+//    // вытягиваем с БД значение по ключу, оно авто ресиализует значение
+//
+////    echo '<label for="study_template_book_date_field">Date of write the book</label>';
+//    echo "<input type='date' id='study_template_book_date_field' name='study_template_book_date_field' value='".esc_attr($value)."'/>";
+//    // esc_attr() делает экранирование в html сущность
+//}
+//function study_template_meta_box_author_callback( $post ) {
+//    $value = get_post_meta($post->ID, '_study_template_author_of_the_book', true);
+//
+//    echo "<input type='text' id='study_template_book_date_field' name='study_template_author_of_the_book' value='".esc_attr($value)."'/>";
+//}
 
-
+//add_action('save_post', 'study_template_save_values_meta_data');
+//function study_template_save_values_meta_data( $post_id ) {
+//    if(array_key_exists('study_template_book_meta_box_nonce', $_POST)) {
+//        update_post_meta($post_id, '_study_template_date_of_write_the_book', sanitize_text_field($_POST['study_template_book_date_field']));
+//        update_post_meta($post_id, '_study_template_author_of_the_book', sanitize_text_field($_POST['study_template_author_of_the_book']));
+//    }
+//}
+//METABOX END

@@ -9,7 +9,7 @@ while ($query->have_posts()) : $query->the_post(); ?>
         <a href="<?php the_permalink(); ?>"><h2 class="text-center mb-3"><?php the_title(); ?></h2></a>
         <?php
         the_post_thumbnail();
-        the_excerpt(); //the_content();
+        the_excerpt();
         ?>
 
         <ul class="m-0 p-0 mb-4">
@@ -36,6 +36,7 @@ while ($query->have_posts()) : $query->the_post(); ?>
                     <?php endforeach; ?>
                 </li>
             <?php endif; ?>
+
 
             <?php
             $user = wp_get_current_user();

@@ -1,11 +1,13 @@
 <?php get_header();
 if (have_posts()) {
-    while (have_posts()) : the_post()?>
-        <div class="col-12 d-flex flex-column justify-content-center mt-4 mb-5 pb-3">
-            <a href="<?php the_permalink(); ?>"><h2 class="text-center mb-3"><?php the_title();?></h2></a>
+    while (have_posts()) : the_post() ?>
+        <div class="col-12 d-flex flex-column justify-content-center mt-4 mb-5 pb-3 book-blur">
+            <a href="<?php the_permalink(); ?>"><h2 class="text-center mb-3"><?php the_title(); ?></h2></a>
             <?php
             the_post_thumbnail();
             the_excerpt(); //the_content();
+            echo get_post_meta($post->ID, '_study_template_author_of_the_book', true);
+            //            the_meta();
             ?>
             <ul class="m-0 p-0 mb-4">
                 <li>Author: <?= get_the_author_link(); ?></li> <!-- get_the_author_link() -->

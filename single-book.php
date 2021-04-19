@@ -10,16 +10,34 @@ if (have_posts()) {
             the_content(); //the_content();
             ?>
             <ul class="m-0 p-0 mb-4">
-                <li>Author: <?= get_the_author_link(); ?></li> <!-- get_the_author_link() -->
-                <li>Time: <?php the_time(); ?></li>
-                <li>
-                    <?php
-                    $user = wp_get_current_user();
-                    if (get_the_author() == $user->nickname || current_user_can('edit_published_posts')) {
-                        edit_post_link();
-                    }
-                    ?>
-                </li>
+                <li>Author: <?php the_field('author'); ?></li>
+                <li>Date: <?php the_field('date_of_book_write'); ?></li>
+
+                <?php
+                $terms = get_field('genres');
+                if (!empty($terms)) {
+                    $terms_count = count($terms);
+                    $position = 0;
+                }
+                if ($terms): ?>
+                    <li>Genres:
+                        <?php foreach ($terms as $term): ?>
+                            <?php
+                            ++$position;
+                            if ($position !== $terms_count):?>
+                                <a href="#"><?php echo esc_html($term->name) . ','; ?></a>
+                            <?php else: ?>
+                                <a href="#"><?php echo esc_html($term->name) . '.'; ?></a>
+                            <?php endif ?>
+                        <?php endforeach; ?>
+                    </li>
+                <?php endif; ?>
+
+                <?php
+                $user = wp_get_current_user();
+                if (get_the_author() == $user->nickname || current_user_can('edit_published_posts')) :?>
+                    <li> <?php edit_post_link(); ?> </li>
+                <?php endif ?>
                 <li>Categories: <?php the_category('/'); ?></li>
                 <p class="text-center m-0 p-0"><a href='<?= home_url() ?>' title='To homepage'>Back to homepage</a></p>
             </ul>
