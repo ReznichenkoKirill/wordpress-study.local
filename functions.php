@@ -5,6 +5,23 @@ add_theme_support('post-thumbnails');
 add_action('init', 'study_template_init');
 function study_template_init()
 {
+    register_taxonomy('genres', ['book'], [
+        'label' => '', // определяется параметром $labels->name
+        'labels' => [
+            'name' => 'Genres',
+            'singular_name' => 'Genre',
+            'search_items' => 'Search Genres',
+            'all_items' => 'All Genres',
+            'view_item ' => 'View Genre',
+            'edit_item' => 'Edit Genre',
+            'update_item' => 'Update Genre',
+            'add_new_item' => 'Add New Genre',
+            'new_item_name' => 'New Genre Name',
+            'menu_name' => 'Genres',
+        ],
+        'hierarchical' => true,
+        'public' => true,
+    ]);
     register_post_type('book', [
             'label' => null,
             'labels' => [
@@ -26,7 +43,7 @@ function study_template_init()
             'has_archive' => true,
             'rewrite' => array('slug' => 'book'),
             'supports' => ['title', 'editor', 'author', 'thumbnail',],
-            'taxonomies' => array('category'),
+            'taxonomies' => array('book'),
         ]
     );
 }
@@ -43,8 +60,8 @@ function study_template_init()
 add_action('wp_enqueue_scripts', 'study_template_scripts');
 function study_template_scripts()
 {
-    wp_enqueue_style('study-template-bootstrap', get_template_directory_uri() . '/assets/css/bootstrap.min.css');
-    wp_enqueue_style('study-template-bootstrap-grid', get_template_directory_uri() . '/assets/css/bootstrap-grid.min.css', ['study-template-bootstrap']);
+    wp_enqueue_style('study-template-bootstrap', get_template_directory_uri() . '/assets/deps/bootstrap/bootstrap.min.css');
+    wp_enqueue_style('study-template-bootstrap-grid', get_template_directory_uri() . '/assets/deps/bootstrap/bootstrap-grid.min.css', ['study-template-bootstrap']);
     wp_enqueue_style('study-template-main', get_template_directory_uri() . '/assets/css/main.css', ['study-template-bootstrap', 'study-template-bootstrap-grid'], '1.0');
 
     wp_enqueue_script('study-template-jquery', get_template_directory_uri() . '/assets/js/bootstrap.min.js');
@@ -66,10 +83,19 @@ function study_template_menu()
         'bottom' => 'Bottom Menu',
     ]);
 }
-add_filter('excerpt_more', function($more) {
+
+add_filter('excerpt_more', function ($more) {
     return '...';
 });
-
+add_action('body_class', function($classes) {
+    $classes[] = 'd-grid';
+    if(is_front_page()){
+        $classes[] = 'body-main';
+    } else {
+        $classes[] = 'book-bg';
+    }
+    return $classes;
+});
 //METABOX START
 //add_action('add_meta_boxes', 'study_template_meta_box');
 //function study_template_meta_box() {
