@@ -13,9 +13,7 @@
         <div class="col-4"><a href="<?= home_url(); ?>"><img
                         src="<?= get_template_directory_uri() ?>/assets/img/book-white.png" alt="book_logo"
                         class="logo-img"></a></div>
-        <ul class="col-8 d-flex justify-content-center">
-            <li><?php wp_nav_menu(['menu' => 'Top Menu', 'container_class' => 'link-light']); ?></li>
-        </ul>
+        <?php wp_nav_menu(['menu' => 'Top Menu', 'container' => 'div', 'container_class' => 'col-8 d-flex justify-content-center' , 'menu_class' => 'd-flex justify-content-evenly', 'before' => '<button type="button" class="button">', 'after' => '</button>']); ?>
     </nav>
 </header>
 <main class="container d-flex flex-column justify-content-center">
