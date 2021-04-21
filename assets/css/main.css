@@ -50,7 +50,7 @@ nav.navigation.pagination {
     justify-content: center;
 }
 .book-bg {
-    background-image: url("../img/bg-book.jpg");
+    background-image: url("../img/backgrounds/bg-book.jpg");
     background-repeat: repeat;
     backdrop-filter: blur(55px);
 }
@@ -90,5 +90,11 @@ header nav *.button:hover {
     background-color: var(--header-nav-button-bg-color_hover);
 }
 .body-main {
-    background-image: url("../img/main-bg.webp");
+    background-image: url("../img/backgrounds/main-bg.webp");
+}
+.button-container a {
+    padding: 10px 22px;
+}
+.button-container button {
+    padding: 0;
 }

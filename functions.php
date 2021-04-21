@@ -42,8 +42,9 @@ function study_template_init()
             'public' => true,
             'has_archive' => true,
             'rewrite' => array('slug' => 'book'),
-            'supports' => ['title', 'editor', 'author', 'thumbnail',],
+            'supports' => ['title', 'editor', 'author', 'thumbnail', 'excerpt', 'custom-fields'],
             'taxonomies' => array('book'),
+            'show_in_rest' => true,
         ]
     );
 }

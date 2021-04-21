@@ -6,8 +6,12 @@ while (have_posts()) : the_post(); ?>
     <div class="col-12 d-flex flex-column justify-content-center mt-4 book-blur">
         <a href="<?php the_permalink(); ?>"><h2 class="text-center mb-3"><?php the_title(); ?></h2></a>
 
+        <div class="d-flex justify-content-center mt-3 mb-5">
+            <?php the_post_thumbnail('medium', [ 'class' => 'text-center']); ?>
+        </div>
+
         <?php
-        the_post_thumbnail();
+
         the_excerpt();
         ?>
 
