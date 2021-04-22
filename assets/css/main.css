@@ -8,6 +8,7 @@
     --button-color-pagination_current-page: #FFF ;
     --header-nav-button-bg-color: rgba(255, 255, 255, 1);;
     --header-nav-button-bg-color_hover: rgba(255, 255, 255, 0.9);
+    --editores-choice_hover: rgba(255, 255, 255, 0.9);
     --header-nav-button-link-color: #000;
 }
 
@@ -97,4 +98,7 @@ header nav *.button:hover {
 }
 .button-container button {
     padding: 0;
+}
+.editors_choice figure:hover {
+    background-color: var(--editores-choice_hover);
 }
