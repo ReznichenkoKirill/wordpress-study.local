@@ -3,7 +3,13 @@
 namespace App\Modules\Gutenberg;
 
 use App\Bootstrap\Bootstrap;
+use App\Modules\Gutenberg\Blocks\EditorsChoice;
+use App\Modules\Gutenberg\Blocks\Genres;
 use App\Modules\Gutenberg\Blocks\Hero;
+use App\Modules\Gutenberg\Blocks\LastPublishedBook;
+use App\Modules\Gutenberg\Blocks\SameCategoryPosts;
+use App\Modules\Gutenberg\Blocks\ShowCategories;
+use App\Modules\Gutenberg\Blocks\Slider;
 
 /**
  * Class Gutenberg
@@ -28,7 +34,11 @@ class Gutenberg
     public function registerBlocks()
     {
         Bootstrap::load([
-            Hero::class
+            Genres::class,
+            Slider::class,
+            EditorsChoice::class,
+            LastPublishedBook::class,
+            ShowCategories::class,
         ]);
     }
 

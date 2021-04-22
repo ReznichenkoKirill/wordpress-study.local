@@ -5,25 +5,30 @@ namespace App\Modules\Theme;
 use App\Helpers\ConfigHelper;
 
 /**
- * Class AbstractPostType
+ * Class AbstractTaxonomy
  * @package App\Modules\Theme
  */
-abstract class AbstractPostType
+abstract class AbstractTaxonomy
 {
     /**
-     * @var string
+     * @var string|array
      */
-    protected $label = '';
+    protected $object_type = '';
 
     /**
      * @var bool
      */
-    protected $has_archive = false;
+    protected $hierarchical = false;
 
     /**
-     * @var array
+     * @var string
      */
-    protected $taxonomies = [];
+    protected $description = '';
+
+    /**
+     * @var string
+     */
+    protected $label = '';
 
     /**
      * @var string
@@ -41,19 +46,9 @@ abstract class AbstractPostType
     protected $public = true;
 
     /**
-     * @var string
-     */
-    protected $icon = 'dashicons-admin-post';
-
-    /**
      * @var string|bool
      */
     protected $configPath = false;
-
-    /**
-     * @var array
-     */
-    protected $supports = ['title', 'thumbnail'];
 
     /**
      * @var bool
@@ -61,32 +56,22 @@ abstract class AbstractPostType
     protected $showInRest = true;
 
     /**
-     * @var array|bool|string
-     */
-    protected $rewrite = true;
-
-    /**
      * AbstractPostType constructor.
      */
     public function __construct()
     {
-        register_post_type($this->slug, array(
+        register_taxonomy($this->slug, $this->object_type , array(
             'label' => $this->label,
             'labels' => $this->labels,
+            'description' => $this->description,
             'public' => $this->public,
             'publicly_queryable' => $this->public,
             'show_ui' => true,
             'show_in_menu' => true,
             'query_var' => true,
-            'rewrite' => $this->rewrite,
-            'capability_type' => 'post',
-            'has_archive' => $this->has_archive,
-            'hierarchical' => false,
-            'menu_position' => null,
+            'rewrite' => true,
+            'hierarchical' => $this->hierarchical,
             'show_in_rest' => $this->showInRest,
-            'menu_icon' => $this->icon,
-            'supports' => $this->supports,
-            'taxonomies' => $this->taxonomies,
         ));
 
         $this->addCustomFields();

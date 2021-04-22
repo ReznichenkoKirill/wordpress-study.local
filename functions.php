@@ -1,52 +1,70 @@
 <?php
 
+require_once 'vendor/autoload.php';
+
+define('STATIC_VERSION', '1.0.0');
+define('THEME_DOMAIN', 'theme');
+define('NO_DATA_MESS', 'No Data');
+\App\Bootstrap\Bootstrap::load([
+    'ConfigHelper' => \App\Helpers\ConfigHelper::class,
+    'TemplateHelper' => \App\Helpers\TemplateHelper::class,
+    \App\Modules\Theme\ThemeOptions::class,
+    App\Modules\Theme\Theme::class,
+    \App\Modules\Theme\ThemeMenu::class,
+    \App\Modules\Gutenberg\Gutenberg::class,
+    \App\Modules\Taxonomies\Genres::class,
+    \App\Modules\PostTypes\Book::class,
+]);
+
+
 add_theme_support('post-thumbnails');
 
 add_action('init', 'study_template_init');
 function study_template_init()
 {
-    register_taxonomy('genres', ['book'], [
-        'label' => '', // определяется параметром $labels->name
-        'labels' => [
-            'name' => 'Genres',
-            'singular_name' => 'Genre',
-            'search_items' => 'Search Genres',
-            'all_items' => 'All Genres',
-            'view_item ' => 'View Genre',
-            'edit_item' => 'Edit Genre',
-            'update_item' => 'Update Genre',
-            'add_new_item' => 'Add New Genre',
-            'new_item_name' => 'New Genre Name',
-            'menu_name' => 'Genres',
-        ],
-        'hierarchical' => true,
-        'public' => true,
-    ]);
-    register_post_type('book', [
-            'label' => null,
-            'labels' => [
-                'name' => 'books',
-                'singular_name' => 'book',
-                'add_new' => 'Add book',
-                'add_new_item' => 'Add book',
-                'edit_item' => 'Edit book',
-                'new_item' => 'New text book',
-                'view_item' => 'Open book',
-                'search_items' => 'Search book',
-                'not_found' => 'Not found',
-                'not_found_in_trash' => 'Not found in trash',
-                'parent_item_colon' => '',
-                'menu_name' => 'books',
-            ],
-            'description' => '',
-            'public' => true,
-            'has_archive' => true,
-            'rewrite' => array('slug' => 'book'),
-            'supports' => ['title', 'editor', 'author', 'thumbnail', 'excerpt', 'custom-fields'],
-            'taxonomies' => array('book'),
-            'show_in_rest' => true,
-        ]
-    );
+//    register_taxonomy('genres', ['book'], [
+//        'label' => '', // определяется параметром $labels->name
+//        'labels' => [
+//            'name' => 'Genres',
+//            'singular_name' => 'Genre',
+//            'search_items' => 'Search Genres',
+//            'all_items' => 'All Genres',
+//            'view_item ' => 'View Genre',
+//            'edit_item' => 'Edit Genre',
+//            'update_item' => 'Update Genre',
+//            'add_new_item' => 'Add New Genre',
+//            'new_item_name' => 'New Genre Name',
+//            'menu_name' => 'Genres',
+//        ],
+//        'hierarchical' => true,
+//        'public' => true,
+//        'show_in_rest' => true,
+//    ]);
+//    register_post_type('book', [
+//            'label' => null,
+//            'labels' => [
+//                'name' => 'books',
+//                'singular_name' => 'book',
+//                'add_new' => 'Add book',
+//                'add_new_item' => 'Add book',
+//                'edit_item' => 'Edit book',
+//                'new_item' => 'New text book',
+//                'view_item' => 'Open book',
+//                'search_items' => 'Search book',
+//                'not_found' => 'Not found',
+//                'not_found_in_trash' => 'Not found in trash',
+//                'parent_item_colon' => '',
+//                'menu_name' => 'books',
+//            ],
+//            'description' => '',
+//            'public' => true,
+//            'has_archive' => true,
+//            'rewrite' => array('slug' => 'book'),
+//            'supports' => ['title', 'editor', 'author', 'thumbnail', 'excerpt', 'custom-fields'],
+//            'taxonomies' => array('genres'),
+//            'show_in_rest' => true,
+//        ]
+//    );
 }
 
 // выводить в последние записи постов / пости_тип[]
@@ -58,16 +76,16 @@ function study_template_init()
 //    return $query;
 //}
 
-add_action('wp_enqueue_scripts', 'study_template_scripts');
-function study_template_scripts()
-{
-    wp_enqueue_style('study-template-bootstrap', get_template_directory_uri() . '/assets/deps/bootstrap/bootstrap.min.css');
-    wp_enqueue_style('study-template-bootstrap-grid', get_template_directory_uri() . '/assets/deps/bootstrap/bootstrap-grid.min.css', ['study-template-bootstrap']);
-    wp_enqueue_style('study-template-main', get_template_directory_uri() . '/assets/css/main.css', ['study-template-bootstrap', 'study-template-bootstrap-grid'], '1.0');
-
-    wp_enqueue_script('study-template-jquery', get_template_directory_uri() . '/assets/js/bootstrap.min.js');
-    wp_enqueue_script('study-template-main', get_template_directory_uri() . '/assets/js/main.js');
-}
+//add_action('wp_enqueue_scripts', 'study_template_scripts');
+//function study_template_scripts()
+//{
+//    wp_enqueue_style('study-template-bootstrap', get_template_directory_uri() . '/assets/deps/bootstrap/bootstrap.min.css');
+//    wp_enqueue_style('study-template-bootstrap-grid', get_template_directory_uri() . '/assets/deps/bootstrap/bootstrap-grid.min.css', ['study-template-bootstrap']);
+//    wp_enqueue_style('study-template-main', get_template_directory_uri() . '/assets/css/main.css', ['study-template-bootstrap', 'study-template-bootstrap-grid'], '1.0');
+//
+//    wp_enqueue_script('study-template-jquery', get_template_directory_uri() . '/assets/js/bootstrap.min.js');
+//    wp_enqueue_script('study-template-main', get_template_directory_uri() . '/assets/js/main.js');
+//}
 
 //add_filter('the_content', 'study_template_content_filter');
 //function study_template_content_filter($content)
@@ -88,9 +106,9 @@ function study_template_menu()
 add_filter('excerpt_more', function ($more) {
     return '...';
 });
-add_action('body_class', function($classes) {
+add_action('body_class', function ($classes) {
     $classes[] = 'd-grid';
-    if(is_front_page()){
+    if (is_front_page()) {
         $classes[] = 'body-main';
     } else {
         $classes[] = 'book-bg';

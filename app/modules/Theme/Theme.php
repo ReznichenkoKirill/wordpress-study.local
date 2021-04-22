@@ -23,7 +23,7 @@ class Theme
         add_action('admin_enqueue_scripts', [$this, 'addAdminStyles']);
         add_action('wp_enqueue_scripts', [$this, 'ajaxUrl'], 99);
         add_filter('render_block', [$this, 'renderBlocks'], 99, 2); //Disable if there is no need to use it
-        add_filter('wp_get_attachment_image_attributes', [$this, 'lazyLoadImages'], 10, 3);
+//        add_filter('wp_get_attachment_image_attributes', [$this, 'lazyLoadImages'], 10, 3);
     }
 
     /**
@@ -49,7 +49,8 @@ class Theme
      */
     public function addFrontendScripts()
     {
-        //
+        wp_enqueue_script('study-template-jquery', get_template_directory_uri() . '/assets/js/bootstrap.min.js');
+        wp_enqueue_script('study-template-main', get_template_directory_uri() . '/assets/js/main.js');
     }
 
     /**
@@ -57,7 +58,9 @@ class Theme
      */
     public function addFrontendStyles()
     {
-        //
+        wp_enqueue_style('study-template-bootstrap', get_template_directory_uri() . '/assets/deps/bootstrap/bootstrap.min.css');
+        wp_enqueue_style('study-template-bootstrap-grid', get_template_directory_uri() . '/assets/deps/bootstrap/bootstrap-grid.min.css', ['study-template-bootstrap']);
+        wp_enqueue_style('study-template-main', get_template_directory_uri() . '/assets/css/main.css', ['study-template-bootstrap', 'study-template-bootstrap-grid'], '1.0');
 
         if (is_admin_bar_showing()) {
             //
@@ -69,7 +72,13 @@ class Theme
      */
     public function addAdminStyles()
     {
-        //
+//        styles
+        wp_enqueue_style('study-template-bootstrap', get_template_directory_uri() . '/assets/deps/bootstrap/bootstrap.min.css');
+        wp_enqueue_style('study-template-bootstrap-grid', get_template_directory_uri() . '/assets/deps/bootstrap/bootstrap-grid.min.css', ['study-template-bootstrap']);
+
+//        scripts
+        wp_enqueue_script('study-template-jquery', get_template_directory_uri() . '/assets/js/bootstrap.min.js');
+
     }
 
     /**
@@ -135,8 +144,12 @@ class Theme
         }
 
         $attr['data-src'] = $attr['src'];
-        $attr['data-srcset'] = $attr['srcset'];
-        $attr['data-sizes'] = $attr['sizes'];
+        if (!empty($attr['srcset'])) {
+            $attr['data-srcset'] = $attr['srcset'];
+        }
+        if (!empty($attr['sizes'])) {
+            $attr['data-sizes'] = $attr['sizes'];
+        }
         $attr['class'] .= ' lazy-load-image';
 
         unset($attr['src']);
