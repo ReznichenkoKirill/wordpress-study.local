@@ -1,0 +1,20 @@
+{
+    "name": "overlord/study-template",
+    "authors": [
+        {
+            "name": "ReznichenkoKirill",
+            "email": "Kirill.reznicenkoo@gmail.com"
+        }
+    ],
+
+    "autoload": {
+        "psr-4": {
+            "App\\Modules\\": "app/modules/",
+            "App\\Helpers\\": "app/helpers/"
+        },
+        "files": [
+            "app/bootstrap/Bootstrap.php"
+        ]
+    },
+    "require": {}
+}
