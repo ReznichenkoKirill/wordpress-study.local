@@ -55,7 +55,7 @@ nav.navigation.pagination {
     background-repeat: repeat;
     backdrop-filter: blur(55px);
 }
-.book-blur {
+.book-blur, div.sidebar {
     background: rgba(255,255,255,.9);
     backdrop-filter: blur(50px);
     padding: 10px 5px;
@@ -101,4 +101,10 @@ header nav *.button:hover {
 }
 .editors_choice figure:hover {
     background-color: var(--editores-choice_hover);
+}
+.book-content-wrap > div {
+    margin-bottom: 20px;
+}
+.book-content-wrap> div:last-of-type {
+    margin-bottom: 0!important;
 }

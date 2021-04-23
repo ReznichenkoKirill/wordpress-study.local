@@ -19,81 +19,6 @@ define('NO_DATA_MESS', 'No Data');
 
 add_theme_support('post-thumbnails');
 
-add_action('init', 'study_template_init');
-function study_template_init()
-{
-//    register_taxonomy('genres', ['book'], [
-//        'label' => '', // определяется параметром $labels->name
-//        'labels' => [
-//            'name' => 'Genres',
-//            'singular_name' => 'Genre',
-//            'search_items' => 'Search Genres',
-//            'all_items' => 'All Genres',
-//            'view_item ' => 'View Genre',
-//            'edit_item' => 'Edit Genre',
-//            'update_item' => 'Update Genre',
-//            'add_new_item' => 'Add New Genre',
-//            'new_item_name' => 'New Genre Name',
-//            'menu_name' => 'Genres',
-//        ],
-//        'hierarchical' => true,
-//        'public' => true,
-//        'show_in_rest' => true,
-//    ]);
-//    register_post_type('book', [
-//            'label' => null,
-//            'labels' => [
-//                'name' => 'books',
-//                'singular_name' => 'book',
-//                'add_new' => 'Add book',
-//                'add_new_item' => 'Add book',
-//                'edit_item' => 'Edit book',
-//                'new_item' => 'New text book',
-//                'view_item' => 'Open book',
-//                'search_items' => 'Search book',
-//                'not_found' => 'Not found',
-//                'not_found_in_trash' => 'Not found in trash',
-//                'parent_item_colon' => '',
-//                'menu_name' => 'books',
-//            ],
-//            'description' => '',
-//            'public' => true,
-//            'has_archive' => true,
-//            'rewrite' => array('slug' => 'book'),
-//            'supports' => ['title', 'editor', 'author', 'thumbnail', 'excerpt', 'custom-fields'],
-//            'taxonomies' => array('genres'),
-//            'show_in_rest' => true,
-//        ]
-//    );
-}
-
-// выводить в последние записи постов / пости_тип[]
-//add_action('pre_get_posts', 'study_template_add_books_to_query');
-//function study_template_add_books_to_query($query)
-//{
-//    if (is_home() && $query->is_main_query())
-//        $query->set('post_type', array('post', 'book'));
-//    return $query;
-//}
-
-//add_action('wp_enqueue_scripts', 'study_template_scripts');
-//function study_template_scripts()
-//{
-//    wp_enqueue_style('study-template-bootstrap', get_template_directory_uri() . '/assets/deps/bootstrap/bootstrap.min.css');
-//    wp_enqueue_style('study-template-bootstrap-grid', get_template_directory_uri() . '/assets/deps/bootstrap/bootstrap-grid.min.css', ['study-template-bootstrap']);
-//    wp_enqueue_style('study-template-main', get_template_directory_uri() . '/assets/css/main.css', ['study-template-bootstrap', 'study-template-bootstrap-grid'], '1.0');
-//
-//    wp_enqueue_script('study-template-jquery', get_template_directory_uri() . '/assets/js/bootstrap.min.js');
-//    wp_enqueue_script('study-template-main', get_template_directory_uri() . '/assets/js/main.js');
-//}
-
-//add_filter('the_content', 'study_template_content_filter');
-//function study_template_content_filter($content)
-//{
-//    $content = ucfirst($content);
-//    return $content;
-//}
-
 add_action('init', 'study_template_menu');
 function study_template_menu()
 {
@@ -115,35 +40,97 @@ add_action('body_class', function ($classes) {
     }
     return $classes;
 });
-//METABOX START
-//add_action('add_meta_boxes', 'study_template_meta_box');
-//function study_template_meta_box() {
-//    add_meta_box('date_of_write', 'Date of write the book', 'study_template_meta_box_date_callback', 'book');
-//    add_meta_box('author_of_the_book', 'Author of the book', 'study_template_meta_box_author_callback', 'book');
-//    // регистрируем новое кастомное метаполе для своего типа записи
-//}
-//function study_template_meta_box_date_callback( $post ) {
-//    wp_nonce_field('study_template_save_date', 'study_template_book_meta_box_nonce');
-//    // делает скрытое поле, для проверки подлиности запроса
-//
-//    $value = get_post_meta($post->ID, '_study_template_date_of_write_the_book', true);
-//    // вытягиваем с БД значение по ключу, оно авто ресиализует значение
-//
-////    echo '<label for="study_template_book_date_field">Date of write the book</label>';
-//    echo "<input type='date' id='study_template_book_date_field' name='study_template_book_date_field' value='".esc_attr($value)."'/>";
-//    // esc_attr() делает экранирование в html сущность
-//}
-//function study_template_meta_box_author_callback( $post ) {
-//    $value = get_post_meta($post->ID, '_study_template_author_of_the_book', true);
-//
-//    echo "<input type='text' id='study_template_book_date_field' name='study_template_author_of_the_book' value='".esc_attr($value)."'/>";
-//}
 
-//add_action('save_post', 'study_template_save_values_meta_data');
-//function study_template_save_values_meta_data( $post_id ) {
-//    if(array_key_exists('study_template_book_meta_box_nonce', $_POST)) {
-//        update_post_meta($post_id, '_study_template_date_of_write_the_book', sanitize_text_field($_POST['study_template_book_date_field']));
-//        update_post_meta($post_id, '_study_template_author_of_the_book', sanitize_text_field($_POST['study_template_author_of_the_book']));
-//    }
-//}
-//METABOX END
+add_action('widgets_init', 'register_my_widgets');
+function register_my_widgets()
+{
+
+    register_sidebar(array(
+        'name' => 'Right sidebar',
+        'id' => "right-sidebar",
+        'description' => '',
+        'class' => '',
+        'before_widget' => '<li id="%1$s" class="widget %2$s">',
+        'after_widget' => "</li>\n",
+        'before_title' => '<h2 class="widgettitle">',
+        'after_title' => "</h2>\n",
+        'before_sidebar' => '',
+        'after_sidebar' => '',
+    ));
+}
+
+#############################
+#
+# CLASSES WIDGET
+#
+#############################
+class Custom_Widget extends WP_Widget
+{
+    public function __construct()
+    {
+        parent::__construct('custom_widget', 'Custom Widget', ['description' => 'Widget for sort book by custom fields']);
+    }
+
+    // Вывод виджета
+    function widget($args, $instance)
+    {
+        $title = !empty($instance['title']) ? $instance['title'] : '';
+
+        /** This filter is documented in wp-includes/widgets/class-wp-widget-pages.php */
+        $title = apply_filters('widget_title', $title, $instance, $this->id_base);
+        echo $args['before_widget'];
+        if ($title) {
+            echo $args['before_title'] . $title . $args['after_title'];
+        }
+
+        echo "<h2 class='text-center'>$this->name</h2>";
+        get_search_form();
+
+        echo $args['after_widget'];
+    }
+
+
+    // Сохранение настроек виджета (очистка)
+    function update($new_instance, $old_instance)
+    {
+    }
+
+    // html форма настроек виджета в Админ-панели
+    function form($instance)
+    {
+    }
+}
+
+add_action('widgets_init', 'my_register_widgets');
+function my_register_widgets()
+{
+    register_widget('custom_widget');
+}
+
+add_action('pre_get_posts', 'study_template_ad_filter');
+function study_template_ad_filter($query)
+{
+    if (is_post_type_archive('book')) {
+        if (!empty($_GET)) {
+            $author = filter_input(INPUT_GET, $_GET['author']);
+            $args = [
+                    'relation' => 'OR',
+                    [
+                        'key' => 'genres',
+                        'value' => !empty($_GET['genres']) ? $_GET['genres'] : '', //!empty($_GET['genres']) ? filter_input(INPUT_GET, $_GET['genres']) : ''
+                    ],
+                    [
+                        'key' => 'author',
+                        'value' => !empty($author) ? $author : '',
+                        'compare' => 'LIKE',
+                    ],
+                    [
+                        'key' => 'date_of_book_write',
+                        'value' => !empty($_GET['date_of_book_write']) ? [$_GET['date_of_book_write']['min'], $_GET['date_of_book_write']['max']] : '' ,
+                        'compare' => 'BETWEEN',
+                    ]
+            ];
+            $query->set('meta_query', $args);
+        }
+    }
+}

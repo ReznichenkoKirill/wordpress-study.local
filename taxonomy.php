@@ -3,7 +3,7 @@ get_header();
 if (have_posts()) : ?>
     <?php while (have_posts()) : the_post(); ?>
 
-        <div class="col-12 d-flex flex-column justify-content-center mt-4 book-blur">
+        <div class="col-12 d-flex flex-column justify-content-center book-blur">
             <a href="<?php the_permalink(); ?>"><h2 class="text-center mb-3"><?php the_title(); ?></h2></a>
             <div class="d-flex justify-content-center mt-3 mb-5">
                 <?php the_post_thumbnail('medium', ['class' => 'text-center']); ?>
@@ -38,18 +38,6 @@ if (have_posts()) : ?>
     <?php
     endwhile;
 
-    $args = array(
-        'show_all' => false,
-        'end_size' => 1,
-        'mid_size' => 1,
-        'prev_next' => true,
-        'prev_text' => __('« Previous'),
-        'next_text' => __('Next »'),
-        'add_args' => false,
-        'add_fragment' => null,
-        'screen_reader_text' => ' ',
-    );
-    the_posts_pagination($args);
     ?>
 <?php else : ?>
     <div class="bg-dark h-75 d-flex justify-content-center align-items-center">

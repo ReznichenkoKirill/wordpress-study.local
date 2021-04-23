@@ -1,7 +1,7 @@
 <?php get_header();
 if (have_posts()) {
     while (have_posts()) : the_post() ?>
-        <div class="col-12 d-flex flex-column justify-content-center mt-4 mb-5 pb-3 book-blur">
+        <div class="col-12 d-flex flex-column justify-content-center mb-5 pb-3 book-blur">
             <a href="<?php the_permalink(); ?>"><h2 class="text-center mb-3"><?php the_title(); ?></h2></a>
             <?php
             the_post_thumbnail();
@@ -25,18 +25,18 @@ if (have_posts()) {
             ?>
         </div>
     <?php endwhile;
-    $args = array(
-        'show_all' => false,
-        'end_size' => 1,
-        'mid_size' => 1,
-        'prev_next' => true,
-        'prev_text' => __('« Previous'),
-        'next_text' => __('Next »'),
-        'add_args' => false,
-        'add_fragment' => null,
-        'screen_reader_text' => ' ',
-    );
-    the_posts_pagination($args);
+//    $args = array(
+//        'show_all' => false,
+//        'end_size' => 1,
+//        'mid_size' => 1,
+//        'prev_next' => true,
+//        'prev_text' => __('« Previous'),
+//        'next_text' => __('Next »'),
+//        'add_args' => false,
+//        'add_fragment' => null,
+//        'screen_reader_text' => ' ',
+//    );
+//    the_posts_pagination($args);
 
 }
 get_footer();

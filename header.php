@@ -25,5 +25,6 @@
         ?>
     </nav>
 </header>
-<main class="container d-flex flex-column justify-content-center">
+<main class="mx-3 d-flex flex-wrap justify-content-center pt-4">
+
     <?php wp_body_open(); ?>

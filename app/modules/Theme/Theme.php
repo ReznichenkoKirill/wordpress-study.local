@@ -49,8 +49,9 @@ class Theme
      */
     public function addFrontendScripts()
     {
-        wp_enqueue_script('study-template-jquery', get_template_directory_uri() . '/assets/js/bootstrap.min.js');
-        wp_enqueue_script('study-template-main', get_template_directory_uri() . '/assets/js/main.js');
+        wp_enqueue_script('study-template-bootstrap', get_template_directory_uri() . '/assets/js/bootstrap.min.js');
+        wp_enqueue_script('study-template-jquery', get_template_directory_uri() . '/assets/js/jquery.js');
+        wp_enqueue_script('study-template-main', get_template_directory_uri() . '/assets/js/main.js', array('study-template-jquery'));
     }
 
     /**
