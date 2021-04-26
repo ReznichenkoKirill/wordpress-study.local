@@ -5,9 +5,10 @@
     --button-color-dark: #1D2327;
     --button-color-pagination: rgba(13, 110, 253, 1);
     --button-color-pagination_hover: rgba(13, 110, 253, .8);
-    --button-color-pagination_current-page: #FFF ;
+    --button-color-pagination_current-page: #FFF;
     --header-nav-button-bg-color: rgba(255, 255, 255, 1);;
     --header-nav-button-bg-color_hover: rgba(255, 255, 255, 0.9);
+    --editores-choice_hover: rgba(255, 255, 255, 0.9);
     --header-nav-button-link-color: #000;
 }
 
@@ -24,71 +25,107 @@
 html {
     height: 100%;
 }
+
 body {
     height: 100%;
     grid-auto-rows: 0fr 1fr 0fr;
 }
+
 header, footer {
     background-color: var(--bg-color-dark);
     color: var(--text-white);
     text-align: center;
     height: max-content;
 }
+
 .logo-img {
     height: 100px;
     object-fit: cover;
 }
+
 main > div {
-    border-bottom: 1px solid var(--bg-color-dark)!important;
+    border-bottom: 1px solid var(--bg-color-dark) !important;
 }
+
 main > :last-of-type {
-    border: none!important;
+    border: none !important;
     /*margin-bottom: 0!important;*/
 }
+
 nav.navigation.pagination {
     display: flex;
     justify-content: center;
 }
+
 .book-bg {
-    background-image: url("../img/bg-book.jpg");
+    background-image: url("../img/backgrounds/bg-book.jpg");
     background-repeat: repeat;
     backdrop-filter: blur(55px);
 }
-.book-blur {
-    background: rgba(255,255,255,.9);
+
+.book-blur, div.sidebar {
+    background: rgba(255, 255, 255, .9);
     backdrop-filter: blur(50px);
     padding: 10px 5px;
     border-radius: 5px;
 
 }
+
 main *.navigation.pagination {
     background-color: var(--bg-color-dark);
     padding: 20px 0;
     margin-top: 1.5rem;
     border-radius: 20px 20px 0 0;
 }
+
 main *.navigation.pagination, main *.page-numbers {
-    color: var(--button-color-pagination)!important;
+    color: var(--button-color-pagination) !important;
 }
+
 main *.navigation.pagination, main *.page-numbers:hover {
-    color: var(--button-color-pagination_hover)!important;
+    color: var(--button-color-pagination_hover) !important;
 }
+
 main *.page-numbers.current {
-    color: var(--button-color-pagination_current-page)!important;
+    color: var(--button-color-pagination_current-page) !important;
 }
+
 header nav *.button > a {
-   padding: 5px 10px;
+    padding: 5px 10px;
     color: #000;
 }
+
 header nav *.button {
     border-radius: 10px;
     margin-left: 5px;
     background-color: var(--header-nav-button-bg-color);
 }
+
 header nav *.button:hover {
     margin-left: 5px;
     background-color: var(--header-nav-button-bg-color_hover);
 }
+
 .body-main {
-    background-image: url("../img/main-bg.webp");
+    background-image: url("../img/backgrounds/main-bg.webp");
+}
+
+.button-container a {
+    padding: 10px 22px;
+}
+
+.button-container button {
+    padding: 0;
+}
+
+.editors_choice figure:hover {
+    background-color: var(--editores-choice_hover);
+}
+
+.book-content-wrap > div {
+    margin-bottom: 20px;
+}
+
+.book-content-wrap > div:last-of-type {
+    margin-bottom: 0 !important;
 }
