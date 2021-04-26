@@ -1,18 +1,25 @@
 <?php
+//DATE
+global $table_prefix;
+global $wpdb;
+$min = $wpdb->get_results( "SELECT MIN(meta_value) FROM {$wpdb->prefix}postmeta WHERE meta_key = 'date_of_book_write'",
+	ARRAY_N );
+$max = $wpdb->get_results( "SELECT MAX(meta_value) FROM {$wpdb->prefix}postmeta WHERE meta_key = 'date_of_book_write'",
+	ARRAY_N );
+$min = mb_substr($min[0][0], 0, 4);
+$max = mb_substr($max[0][0], 0, 4);
+
+//AUTHOR
+
+//GENRES
 $genres = get_terms([
     'taxonomy' => 'genres',
 ]);
-global $table_prefix;
-global $wpdb;
-$min = $wpdb->get_results("SELECT MIN(meta_value) FROM {$wpdb->prefix}postmeta WHERE meta_key = 'date_of_book_write'", ARRAY_N);
-$max = $wpdb->get_results("SELECT MAX(meta_value) FROM {$wpdb->prefix}postmeta WHERE meta_key = 'date_of_book_write'", ARRAY_N);
-$min = mb_substr($min[0][0], 0, 4);
-$max = mb_substr($max[0][0], 0, 4);
 ?>
     <form role="search" action="<?php echo get_post_type_archive_link('book') ?>?" method="GET">
 <!--        <label for="s">Search</label>-->
 <!--        <input type="text" value="" name="s" id="s"/>-->
-        <!-- type="text" value="" name="s" id="s" объязательные поля для формы поиска -->
+<!--         type="text" value="" name="s" id="s" объязательные поля для формы поиска -->
 
         <div class="mx-2 p-2">
             <h3>Author:</h3>
@@ -21,11 +28,11 @@ $max = mb_substr($max[0][0], 0, 4);
         <div class="mx-2 p-2">
             <h3>Date:</h3>
             <div>
-                <input type="number" min="<?php echo $min ?>" max="<?php echo $max ?>" name="date_of_book_write[min]">
+                <input type="number" min="<?php echo $min ?>" max="<?php echo $max ?>" name="date_of_book_write[min]" value="<?php echo !empty($_GET['date_of_book_write']['min']) ? esc_attr($_GET['date_of_book_write']['min']) : $min; ?>">
                 <label for="">Min</label>
             </div>
             <div>
-                <input type="number" min="<?php echo $min ?>" max="<?php echo $max ?>" name="date_of_book_write[max]">
+                <input type="number" min="<?php echo $min ?>" max="<?php echo $max ?>" name="date_of_book_write[max]" value="<?php echo !empty($_GET['date_of_book_write']['max']) ? esc_attr($_GET['date_of_book_write']['max']) : $max; ?>">
                 <label for="">Max</label>
             </div>
         </div>

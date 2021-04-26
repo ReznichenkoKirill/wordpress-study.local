@@ -1,2 +1,2 @@
 <?php
-dynamic_sidebar('right-sidebar');
+dynamic_sidebar( 'right-sidebar' );
